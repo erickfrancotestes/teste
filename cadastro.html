@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bilheteria do Titanic - Cadastro do Cliente</title>
+    <meta charset="UTF-8">
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    header {
+        background-color: #333;
+        color: #fff;
+        padding: 10px;
+    }
+
+    nav {
+        display: flex;
+        justify-content: center;
+        background-color: #ccc;
+        padding: 10px;
+    }
+
+    nav a {
+        text-decoration: none;
+        color: #333;
+        background-color: #f2f2f2;
+        padding: 10px;
+        border-radius: 5px;
+        border-style: outset;
+        margin: 5px;
+    }
+
+    nav a:hover {
+        background-color: #333;
+        color: #fff;
+    }
+
+    main {
+        flex: 1;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+        }
+
+    .form-container {
+        width: 390px;
+        padding: 20px;
+        border: 5px solid #ccc;
+        border-radius: 10px;
+        border-style: outset;
+        background-color: #fff;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px;
+    }
+
+    .form-group label {
+        margin-bottom: 5px;
+    }
+
+    .form-group input, .form-group select {
+        padding: 5px;
+    }
+
+    .form-group.inline-group {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .form-group.inline {
+        display: inline-block;
+        width: 45%;
+    }
+</style>
+<body>
+    <header>
+        <!-- Menu de navegação -->
+        <nav>
+            <!-- Coloque aqui os links para as outras páginas -->
+            <a href="index.html">Página Inicial</a>
+            <a href="sobre.html">Sobre</a>
+            <a href="tickets.html">Tickets</a>
+            <a href="cadastro.html">Cadastro</a>
+            <a href="compra.html">Compra</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Formulário de cadastro do cliente -->
+        <div class="form-container">
+            <h1>Cadastro do Cliente</h1>
+            <form onsubmit="return validarFormulario()">
+                <!-- Campos do formulário... -->
+                <div class="form-group">
+                    <label for="nome">Nome:</label>
+                    <input type="text" id="nome" name="nome" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">E-mail:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="cpf">CPF:</label>
+                    <input type="text" id="cpf" name="cpf" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="endereco">Endereço:</label>
+                    <input type="text" id="endereco" name="endereco" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="telefone">Telefone:</label>
+                    <input type="text" id="telefone" name="telefone" required>
+                </div>
+
+                <div class="form-group inline">
+                    <label for="sexo">Sexo:</label>
+                    <select id="sexo" name="sexo" required>
+                        <option value="">Selecione...</option>
+                        <option value="masculino">Masculino</option>
+                        <option value="feminino">Feminino</option>
+                        <option value="outro">Outro</option>
+                    </select>
+                </div>
+
+                <div class="form-group inline">
+                    <label for="idade">Idade:</label>
+                    <input type="number" id="idade" name="idade" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="senha">Senha:</label>
+                    <input type="password" id="senha" name="senha" required>
+                </div>
+
+                <!-- Aviso de envio de dados -->
+                <div id="aviso-enviado" style="display: none; color: green;">
+                    Seus dados foram enviados com sucesso!
+                </div>
+
+                <!-- Aviso de erro -->
+                <div id="aviso-erro" style="display: none; color: red;">
+                    Por favor, preencha todos os campos obrigatórios.
+                </div>
+
+                <button type="submit">Cadastrar</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <!-- Rodapé -->
+        <p>Email de contato: projetotitanic@gmail.com<br>
+            Telefone para suporte: 9999-1234</p>
+    </footer>
+
+    <script>
+        function validarFormulario() {
+        var nome = document.getElementById("nome").value;
+        var email = document.getElementById("email").value;
+        var cpf = document.getElementById("cpf").value;
+        var endereco = document.getElementById("endereco").value;
+        var telefone = document.getElementById("telefone").value;
+        var sexo = document.getElementById("sexo").value;
+        var idade = document.getElementById("idade").value;
+        var senha = document.getElementById("senha").value;
+
+        if (nome === "" || email === "" || cpf === "" || endereco === "" || telefone === "" || sexo === "" || idade === "" || senha === "") {
+            // Exibe o aviso de erro caso algum campo esteja em branco
+            document.getElementById("aviso-erro").style.display = "block";
+            document.getElementById("aviso-enviado").style.display = "none";
+            return false; // Impede o formulário de ser enviado
+        }
+
+        // Exibe a mensagem de processamento
+        document.getElementById("aviso-enviado").style.display = "block";
+        document.getElementById("aviso-enviado").textContent = "Processando cadastro...";
+
+        // LOADING FALSO QUE FICOU BONITINHO
+        setTimeout(function() {
+            // vai pra proxima pagina
+            window.location.href = "pagina-de-confirmacao.html";
+        }, 2000); // PRENDE A PESSOA POR 2000 milissegundos ATE IR PRA PROXIMA PAGINA
+
+        return false; // Impede o envio do formulário
+    }
+    </script>
+</body>
+</html>
